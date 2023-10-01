@@ -22,6 +22,7 @@ import io.ebean.Transaction;
 import utils.AppUtil;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import utils.EventConverter;
 
 public class UserEventRegistrationController extends Controller {
 
@@ -43,18 +44,8 @@ public class UserEventRegistrationController extends Controller {
                 .where()
                 .in("id", eventIds)
                 .findList();
-            
-            List<EventDTO> eventDtos = events.stream().map(event -> {
-            EventDTO dto = new EventDTO();
-                dto.setId(event.getId());
-                dto.setEventName(event.getEventName());
-                dto.setStartTime(event.getStartTime());
-                dto.setEndTime(event.getEndTime());
-                dto.setCategory(event.getEventType().getCategory());
-                dto.setImage(event.getEventType().getImage());
-                return dto;
-            }).collect(Collectors.toList());
-        
+
+            List<EventDTO> eventDtos = EventConverter.convertToEventDTOList(events);
             return ok(Json.toJson(eventDtos));
 
         } catch (NumberFormatException e) {
