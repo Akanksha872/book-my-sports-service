@@ -11,6 +11,25 @@ Book My Sports is a Java(play) application that allows users to register for eve
 
 SBT is the built tool used for this Java-based project. Some useful commands are listed below
 
+
+## Docker Setup
+1. Change Database connection endpoint in `application.conf` file 
+
+
+If the database server is running on the host machine, need to use the host's IP address
+
+
+change `jdbc:mysql://localhost:3306` to `jdbc:mysql://host.docker.internal:3306`
+
+2. Build Image:
+
+`docker build -t book-my-sport-service .`
+
+3. Run Docker Image:
+
+`docker run -p 9001:9001 book-my-sport-service`
+
+
 ### IDE 
 
 You may use Eclipse as your IDE. Use the following command to create Eclipse project files 
