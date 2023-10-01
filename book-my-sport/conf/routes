@@ -1,0 +1,16 @@
+# Routes
+# This file defines all application routes
+# ~~~~
+
+# User Management
+POST     /api/v1/user                              controllers.UserController.createUser(request: Request)
+GET     /api/v1/login/:email                       controllers.UserController.login(email: String)
+
+
+# Event Management
+GET     /api/v1/events                              controllers.EventController.getAllEvents()
+
+# Event Registration
+GET     /api/v1/registered-events/:userId                  controllers.UserEventRegistrationController.getAllRegisteredEvents(userId: String)
+POST    /api/v1/register-event                        controllers.UserEventRegistrationController.registerEvent(request: Request)
+POST    /api/v1/unregister-event                      controllers.UserEventRegistrationController.unregisterEvent(request: Request)
