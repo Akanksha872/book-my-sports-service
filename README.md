@@ -51,6 +51,7 @@ CREATE TABLE user (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
   `email` varchar(64) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -83,6 +84,7 @@ CREATE TABLE user_event_registration (
     id INT(10) NOT NULL AUTO_INCREMENT,
     user_id INT(10) NOT NULL,
     event_id INT(10) NOT NULL,
+    created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (event_id) REFERENCES events(id)
