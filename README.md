@@ -29,15 +29,6 @@ change `jdbc:mysql://localhost:3306` to `jdbc:mysql://host.docker.internal:3306`
 
 `docker run -p 9001:9001 book-my-sport-service`
 
-
-### IDE 
-
-You may use Eclipse as your IDE. Use the following command to create Eclipse project files 
-
-```
-sbt eclipse
-```
-
 ### Compile Service
 
 ```
@@ -54,11 +45,6 @@ OR
 sbt "run 9001" // uses user specified port, 9001 for this example
 ```
 
-### Debugging 
-
-```
- sbt -jvm-debug 9999 "run 9001" // starts debugger on port 9999 and application on port 9001
-```
 ## Database
 
 - DBMS: MySQL
@@ -149,6 +135,15 @@ VALUES
     ('Badmintion Singles', '2023-12-17 13:00:00', '2023-12-17 14:00:00', 4);
 
 ```
+
+## 🛠 APIs
+
+- **User Event Registration**: List all user registered events and allows to register and unregister events
+
+- **Events Listing**: Lists all the available events.
+
+- **User Management**: Create user and login for user 
+
 
 ## Frontend Code Repo
 Link: https://github.com/Akanksha872/book-my-sports
