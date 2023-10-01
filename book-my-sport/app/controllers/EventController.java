@@ -3,13 +3,10 @@ package controllers;
 import play.mvc.Controller;
 import play.mvc.Result;
 import io.ebean.Ebean;
-
 import models.Event;
 import models.dto.EventDTO;
 import java.util.List;
-
 import java.util.stream.Collectors;
-
 import play.libs.Json;
 
 public class EventController extends Controller {

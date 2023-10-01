@@ -23,6 +23,7 @@ create table user (
   id                            bigint auto_increment not null,
   name                          varchar(255),
   email                         varchar(255),
+  created_at                    datetime(6),
   constraint pk_user primary key (id)
 );
 
@@ -30,6 +31,7 @@ create table user_event_registration (
   id                            bigint auto_increment not null,
   event_id                      integer not null,
   user_id                       integer not null,
+  created_at                    datetime(6),
   constraint pk_user_event_registration primary key (id)
 );
 

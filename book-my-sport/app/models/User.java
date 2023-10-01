@@ -1,12 +1,13 @@
 package models;
 
 import javax.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.ebean.Finder;
 import io.ebean.Model;
 
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -18,6 +19,8 @@ public class User extends Model {
     private Long id;
     private String name;
     private String email;
+    @JsonProperty("created_at")
+    private Date createdAt;
 
     public User() {}
 
@@ -48,6 +51,14 @@ public class User extends Model {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public static final Finder<Long, User> find = new Finder<>(User.class);

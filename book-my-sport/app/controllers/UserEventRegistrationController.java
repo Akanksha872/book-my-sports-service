@@ -8,6 +8,8 @@ import models.User;
 import models.Event;
 import models.dto.EventDTO;
 import models.UserEventRegistration;
+
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,10 +26,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class UserEventRegistrationController extends Controller {
 
     public Result getAllRegisteredEvents(String userId) {
-        // Parse the userId string into an integer
         try {
             int userIdInt = Integer.parseInt(userId);
-
             List<UserEventRegistration> userEvents = Ebean.find(UserEventRegistration.class)
                 .where()
                 .eq("user_id", userIdInt)
@@ -58,13 +58,13 @@ public class UserEventRegistrationController extends Controller {
             return ok(Json.toJson(eventDtos));
 
         } catch (NumberFormatException e) {
-            return badRequest("Invalid user ID format.");
+            return badRequest(AppUtil.createMessageNode("Invalid user ID format."));
         }
     }
 
     public Result registerEvent(Request request) {
         if(request.body() == null){
-            return badRequest("Missing JSON body.");
+            return badRequest(AppUtil.createMessageNode("Missing JSON body."));
         }
         JsonNode body = request.body().asJson();
         try {
@@ -78,15 +78,12 @@ public class UserEventRegistrationController extends Controller {
             if(event == null) {
                 return badRequest("Invalid event id");
             }
-            System.out.println("-------------------");
-            System.out.println(userId);
-            System.out.println(eventId);
-            System.out.println("-------------------");
             UserEventRegistration registration = new UserEventRegistration(eventId, userId);
+            registration.setCreatedAt(new Date());
             registration.save();
-            return ok("Event registration saved successfully.");
+            return ok(AppUtil.createMessageNode("Event registration saved successfully."));
         } catch (Exception e) {
-            return internalServerError("Failed to register event.");
+            return internalServerError(AppUtil.createMessageNode("Failed to register event."));
         }
 
     }
@@ -94,7 +91,7 @@ public class UserEventRegistrationController extends Controller {
     public Result unregisterEvent(Request request) {
 
         if(request.body() == null){
-            return badRequest("Missing JSON body.");
+            return badRequest(AppUtil.createMessageNode("Missing JSON body."));
         }
         JsonNode body = request.body().asJson();
         try {
@@ -103,10 +100,10 @@ public class UserEventRegistrationController extends Controller {
             User user = Ebean.find(User.class).where().eq("id", userId).findOne(); 
             Event event = Ebean.find(Event.class).where().eq("id", eventId).findOne(); 
             if(user == null) {
-                return badRequest("Invalid user id");
+                return badRequest(AppUtil.createMessageNode("Invalid user id"));
             }
             if(event == null) {
-                return badRequest("Invalid event id");
+                return badRequest(AppUtil.createMessageNode("Invalid event id"));
             }
             UserEventRegistration existingRegistration = Ebean.find(UserEventRegistration.class)
             .where()
@@ -114,12 +111,12 @@ public class UserEventRegistrationController extends Controller {
             .eq("event_id", eventId).findOne();
 
             if (existingRegistration == null) {
-             return badRequest("No matching registration found.");
+             return badRequest(AppUtil.createMessageNode("No matching registration found."));
             }
             Ebean.delete(existingRegistration);
-            return ok("Event unregistration successfully.");
+            return ok(AppUtil.createMessageNode("Event unregistration successfully."));
         } catch (Exception e) {
-            return internalServerError("Failed to unregister event.");
+            return internalServerError(AppUtil.createMessageNode("Failed to unregister event."));
         }
     }
 
