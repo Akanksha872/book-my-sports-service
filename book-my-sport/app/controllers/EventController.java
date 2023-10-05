@@ -6,7 +6,6 @@ import io.ebean.Ebean;
 import models.Event;
 import models.dto.EventDTO;
 import java.util.List;
-import java.util.stream.Collectors;
 import play.libs.Json;
 import utils.EventConverter;
 

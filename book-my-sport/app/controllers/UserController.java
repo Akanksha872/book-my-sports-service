@@ -4,15 +4,11 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import io.ebean.Ebean;
 import utils.AppUtil;
-
 import java.util.Date;
 import java.util.Optional;
 import java.util.List;
-
 import play.mvc.Http.Request;
-
 import models.User;
-
 import play.libs.Json;
 
 public class UserController extends Controller {

@@ -69,6 +69,16 @@ public class UserEventRegistrationController extends Controller {
             if(event == null) {
                 return badRequest("Invalid event id");
             }
+            UserEventRegistration eventRegistration = Ebean.find(UserEventRegistration.class)
+                .where()
+                .eq("userId", userId)
+                .eq("eventId", eventId)
+                .findOne();
+
+            if (eventRegistration != null) {
+                return badRequest("Same event cannot be registered by the user twice.");
+            }   
+
             UserEventRegistration registration = new UserEventRegistration(eventId, userId);
             registration.setCreatedAt(new Date());
             registration.save();
