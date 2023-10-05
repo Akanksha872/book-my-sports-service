@@ -29,3 +29,4 @@ coverage/
 .g8/
 .DS_Store
 conf/evolutions/
+book-my-sport/.metadata/
