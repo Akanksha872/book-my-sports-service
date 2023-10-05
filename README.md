@@ -96,6 +96,12 @@ CREATE TABLE user_event_registration (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
+Adding index to tables
+
+```
+ CREATE INDEX idx_event_type_id ON events (event_type_id);
+ CREATE INDEX idx_user_id_event_id ON user_event_registration (user_id, event_id);
+```
 
 Insert Commands for testing purposes:
 ```
