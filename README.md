@@ -96,12 +96,6 @@ CREATE TABLE user_event_registration (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
 
-Adding unique index to tables
-
-```
- ALTER TABLE `client_plugin` ADD UNIQUE `client_plugin_unique_index`(`client`, `feature_id`);
- ALTER TABLE `early_access` ADD UNIQUE `early_access_unique_index`(`client`, `feature_id`);
-```
 
 Insert Commands for testing purposes:
 ```
